@@ -17,5 +17,5 @@ spec:
       serviceAccountName: strimzi-registry-operator
       containers:
         - name: operator
-          image: lsstsqre/strimzi-registry-operator:build
+          image: amolde/strimzi-registry-operator:latest
           imagePullPolicy: Always

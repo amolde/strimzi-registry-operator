@@ -20,13 +20,16 @@ LABEL version="$VERSION"
 # Must run python setup.py sdist first before building the Docker image.
 
 COPY dist/strimzi-registry-operator-$VERSION.tar.gz .
+COPY bin/run.sh .
 RUN pip install strimzi-registry-operator-$VERSION.tar.gz && \
     rm strimzi-registry-operator-$VERSION.tar.gz && \
-    groupadd -r app_grp && useradd -r -g app_grp app && \
-    chown -R app:app_grp $APPDIR
+    chmod u+x $APPDIR/run.sh && \
+    useradd -g root app && \
+    chown -R app:root $APPDIR && \
+    chmod g+w /etc/passwd
 
 USER app
 
 # TODO: refactor "namespace" argument into an environment variable for
 # configurability.
-CMD ["kopf", "run", "--standalone", "-m", "strimziregistryoperator.handlers", "--namespace", "events", "--verbose"]
+CMD ["/app/run.sh"]

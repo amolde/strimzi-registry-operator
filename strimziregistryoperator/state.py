@@ -1,13 +1,13 @@
 """Constructed (cached) state as module-level attributes.
 """
 
-cluster_name = 'events'
+cluster_name = 'my-cluster'
 """The name of the Kafka cluster serviced by the operator.
 
 TODO: make this configurable.
 """
 
-namespace = 'events'
+namespace = 'myproject'
 """The name of the Kubernetes namespace monitored by this operator.
 
 TODO: make this configurable.
