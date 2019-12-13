@@ -24,8 +24,10 @@ rules:
 
   # Application: watching & handling for the custom resource we declare.
   - apiGroups: [roundtable.lsst.codes]
-    resources: [strimzischemaregistries]
-    verbs: [get, list, watch, patch]
+    resources: 
+      - strimzischemaregistries
+      - strimzischemaregistries/finalizers
+    verbs: [get, list, watch, patch, update]
 
   # Access to the built-in resources the operator manages
   - apiGroups: [""]

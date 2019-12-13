@@ -135,7 +135,14 @@ def create_secret(*, kafka_username, namespace, cluster, owner, k8s_client,
 
     # Set the owner on the secret. kopf.adopt only works on dicts
     secret_body = api_instance.api_client.sanitize_for_serialization(secret)
+    
+    logger.debug('before:')
+    logger.debug(secret_body)
+
     kopf.adopt(secret_body, owner=owner)
+
+    logger.debug('after:')
+    logger.debug(secret_body)
 
     api_instance.create_namespaced_secret(
         namespace=namespace,
